@@ -1,6 +1,5 @@
 # ============================================
 # BACKEND API PANADERÍA - Flask
-# Archivo: app.py
 # ============================================
 
 from flask import Flask, request, jsonify
@@ -17,9 +16,9 @@ CORS(app)  # Permite peticiones desde el frontend
 # ============================================
 
 DB_CONFIG = {
-    'host': '127.0.0.1',
+    'host': 
     'user': 'root',
-    'password': '1234',  # CAMBIAR AQUÍ
+    'password': 
     'database': 'panaderia_db',
     'pool_name': 'panaderia_pool',
     'pool_size': 5
@@ -369,4 +368,5 @@ def actualizar_estado_delivery(id):
 if __name__ == '__main__':
     print('🍞 Servidor API iniciado en http://localhost:5000')
     print('📚 Documentación: Ver archivo ENDPOINTS.txt')
+
     app.run(debug=True, host='0.0.0.0', port=5000)
