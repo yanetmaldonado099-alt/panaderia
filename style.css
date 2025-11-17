@@ -1,0 +1,143 @@
+/*
+ * Paleta de Colores para Panadería:
+ * Dorado/Amarillo (Pan/Masa): #DAA520 (color-principal)
+ * Marrón Oscuro (Corteza/Chocolate): #8B4513 (color-secundario)
+ * Gris Carbón (Texto/Contraste): #36454F (color-oscuro)
+ * Beige/Crema (Fondo Principal): #FAF0E6 (color-fondo)
+ */
+
+:root {
+    --color-principal: #DAA520; /* Dorado */
+    --color-secundario: #dd05c0; /* Marrón Oscuro */
+    --color-fondo: #736b77c7; /* Beige/Crema */
+    --color-oscuro: #c44593; /* rosado */
+    --sombra-card: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-fondo);
+    line-height: 1.7;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* ------------------ CABECERA Y LOGO (Ajustes para el botón) ------------------ */
+
+.header {
+    /* Mantenemos el flexbox para centrar el logo */
+    background-color: var(--color-oscuro);
+    padding: 20px 20px; /* Aseguramos espacio para el botón */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+/* El nav-menu ahora está vacío o con enlaces secundarios, se mantiene solo para estructura */
+.nav-menu {
+    /* Le damos ancho fijo para que no interfiera con el logo centrado */
+    width: 20px; 
+    margin: 0;
+}
+
+/* ------------------ NUEVOS ESTILOS: MENÚ HAMBURGUESA Y SIDEBAR ------------------ */
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--color-principal); /* Rojo de la carnicería */
+    font-size: 1.8em;
+    cursor: pointer;
+    z-index: 101; 
+    padding: 0;
+    /* Posiciona el botón en la izquierda sin alterar el flujo del header */
+    position: absolute; 
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar-menu {
+    height: 100%;
+    width: 0; /* Oculto por defecto */
+    position: fixed;
+    z-index: 200; /* Por encima de todo */
+    top: 0;
+    left: 0;
+    background-color: var(--color-oscuro); /* Negro/Gris de la cabecera */
+    overflow-x: hidden;
+    transition: 0.5s; /* Animación de despliegue */
+    padding-top: 60px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-menu a {
+    padding: 15px 25px 15px 32px;
+    text-decoration: none;
+    font-size: 1.1em;
+    color: var(--color-fondo); /* Blanco para contraste */
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+    color: var(--color-secundario); /* Amarillo al pasar el ratón */
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-menu h3 {
+    padding: 0 32px;
+    margin-bottom: 10px;
+    color: var(--color-principal); /* Rojo para el título */
+}
+
+.menu-category-title {
+    padding: 15px 32px 5px 32px;
+    color: #aaa;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.sidebar-menu .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: var(--color-principal);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Overlay (Fondo oscuro) */
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 150;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Oculto por defecto */
+    transition: opacity 0.5s;
+}

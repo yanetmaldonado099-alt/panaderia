@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panadería de Todo un Poco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIExvZ28gZGUgUGFuaWZpY2FjacOzbiAtLT4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTBlMGUwIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjE1JSIgZm9udC1mYW1pbHk9IkN1cnNpdmUsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZpbGw9IiNkMGQwZDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlIHRvZG8gdW4gcG9jbzwvdGV4dD4KICA8cGF0aCBkPSJNMTUwLDI1MCBRMTUwLDIwMCAxODAsMTgwIEwyMDAsMTcwIFEyMjAsMTYwIDI0MCwxNzAgTDI2MCwxODAgUTI5MCwyMDAgMjkwLDI1MCBMMjkwLDMwMCBRMjkwLDMyMCAyNzAsMzMwIEwyMDAsMzMwIFExODAsMzMwIDE3MCwzMjAgTDE1MCwzMDAgWiIgZmlsbD0iI2UwZTBlMCIgc3Ryb2tlPSIjYzBjMGMwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZWxsaXBzZSBjeD0iMjIwIiBjeT0iMjIwIiByeD0iNDAiIHJ5PSIzMCIgZmlsbD0iI2QwZDBkMCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iODUlIiBmb250LWZhbWlseT0iQ3Vyc2l2ZSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZmlsbD0iI2QwZDBkMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UGFuaWZpY2FjacOzbjwvdGV4dD4KPC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(245, 245, 245, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(0,0,0,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            overflow: hidden;
+            animation: slideDown 0.6s ease-out;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background-image: url('img/fondo.jpeg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.50;
+            z-index: 0;
+        }
+
+        header::after {
+            content: '🥖🍞🥐';
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            font-size: 30px;
+            opacity: 0.3;
+            letter-spacing: 10px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.3),
+                0 0 20px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        h1::before {
+            content: '';
+            width: 150px;
+            height: 150px;
+            background-image: url('img/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            width: 150px;
+            height: 150px;
+            background-image: url('img/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+        }
+
+        h2 {
+            color: #8B4513;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #CD853F;
+            position: relative;
+            z-index: 2;
+        }
+
+        h3 {
+            color: #8B4513;
+            margin: 20px 0 10px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-style: italic;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e0e0e0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #e9ecef;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .tab:hover {
+            background: #dee2e6;
+            color: #333;
+        }
+
+        .tab.active {
+            background: white;
+            color: #8B4513;
+            border-bottom: 4px solid #CD853F;
+            box-shadow: 0 -2px 10px rgba(139, 69, 19, 0.2);
+        }
+
+        .content {
+            padding: 30px;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background-image: url('logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .section {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(135deg, #8B4513 0%, #CD853F 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            background: linear-gradient(135deg, #A0522D 0%, #DEB887 100%);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #228B22 0%, #90EE90 100%);
+            box-shadow: 0 4px 15px rgba(34, 139, 34, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(34, 139, 34, 0.4);
+            background: linear-gradient(135deg, #32CD32 0%, #98FB98 100%);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #8B4513;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: black;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .item-venta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .item-venta select, .item-venta input {
+            flex: 1;
+        }
+
+        .item-venta button {
+            background: #dc3545;
+            padding: 10px 20px;
+        }
+
+        #mensaje {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        #mensaje.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #mensaje.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: #CD853F;
+        }
+
+        .card h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+        }
+
+        .card .precio {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        .card .stock {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .producto-venta {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .producto-venta:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(255, 107, 107, 0.3);
+            border-color: #ff6b6b;
+        }
+
+        .producto-venta.sin-stock {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(80%);
+        }
+
+        .producto-venta .imagen {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .producto-venta h4 {
+            margin: 10px 0 5px 0;
+            color: #333;
+        }
+
+        .producto-venta .precio-venta {
+            font-size: 20px;
+            font-weight: bold;
+            color: #28a745;
+            margin: 5px 0;
+        }
+
+        .producto-venta .stock-venta {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .carrito-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-cantidad {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #8B4513;
+            background: white;
+            color: #8B4513;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            transition: all 0.2s;
+        }
+
+        .btn-cantidad:hover {
+            background: #8B4513;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .btn-eliminar {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .cantidad-display {
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Panadería de Todo un Poco</h1>
+            <p>Gestión de productos, ventas y deliveries</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="cambiarTab('productos')">Productos</button>
+            <button class="tab" onclick="cambiarTab('clientes')">Clientes</button>
+            <button class="tab" onclick="cambiarTab('ventas')">Ventas</button>
+            <button class="tab" onclick="cambiarTab('deliveries')">Deliveries</button>
+        </div>
+
+        <div class="content">
+            <div id="mensaje"></div>
+
+            <!-- SECCIÓN PRODUCTOS -->
+            <div id="productos" class="section active">
+                <h2>Catálogo de Productos</h2>
+                
+                <form id="formProducto" style="margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" id="nombreProducto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select id="categoriaProducto" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="pan">Pan</option>
+                            <option value="torta">Torta</option>
+                            <option value="postre">Postre</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Precio</label>
+                        <input type="number" id="precioProducto" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Stock Inicial</label>
+                        <input type="number" id="stockProducto" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea id="descripcionProducto" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit">Agregar Producto</button>
+                </form>
+
+                <div id="listaProductos" class="grid"></div>
+            </div>
+
+            <!-- SECCIÓN CLIENTES -->
+            <div id="clientes" class="section">
+                <h2>Registro de Clientes</h2>
+                
+                <form id="formCliente" style="margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" id="nombreCliente" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="telefonoCliente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="emailCliente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <textarea id="direccionCliente" rows="2"></textarea>
+                    </div>
+                    
+                    <button type="submit">Registrar Cliente</button>
+                </form>
+
+                <table id="tablaClientes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- SECCIÓN VENTAS -->
+            <div id="ventas" class="section">
+                <h2>Nueva Venta</h2>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                    <!-- Panel de productos -->
+                    <div>
+                        <h3>Seleccionar Productos</h3>
+                        <div style="margin-bottom: 15px;">
+                            <label>Filtrar por categoría:</label>
+                            <select id="filtroCategoria" onchange="filtrarProductosVenta()" style="width: auto; display: inline-block; margin-left: 10px;">
+                                <option value="">Todas</option>
+                                <option value="pan">Pan</option>
+                                <option value="torta">Torta</option>
+                                <option value="postre">Postre</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div id="productosVenta" class="grid"></div>
+                    </div>
+                    
+                    <!-- Panel de carrito -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; position: sticky; top: 20px;">
+                        <h3>Carrito de Venta</h3>
+                        
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <select id="clienteVenta">
+                                <option value="">Sin cliente</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tipo de Entrega</label>
+                            <select id="tipoEntrega" required>
+                                <option value="mostrador">Mostrador</option>
+                                <option value="delivery">Delivery</option>
+                            </select>
+                        </div>
+                        
+                        <div style="border-top: 2px solid #ddd; margin: 20px 0; padding-top: 15px;">
+                            <div id="carritoItems" style="max-height: 300px; overflow-y: auto;"></div>
+                            
+                            <div id="carritoVacio" style="text-align: center; color: #999; padding: 30px;">
+                                🛒 Carrito vacío<br>
+                                <small>Haz clic en los productos para agregar</small>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <strong style="font-size: 18px;">TOTAL:</strong>
+                                <span style="font-size: 28px; font-weight: bold; color: #28a745;">
+                                    $<span id="totalVenta">0.000</span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="completarVenta()" style="width: 100%; margin-top: 15px; padding: 15px; font-size: 18px;">
+                            💳 Completar Venta
+                        </button>
+                        
+                        <button onclick="limpiarCarrito()" class="btn-secondary" style="width: 100%; margin-top: 10px;">
+                            🗑️ Limpiar Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Historial de Ventas</h3>
+                <table id="tablaVentas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Total</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- SECCIÓN DELIVERIES -->
+            <div id="deliveries" class="section">
+                <h2>Gestión de Deliveries</h2>
+                
+                <form id="formDelivery" style="margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>ID de Venta (Delivery)</label>
+                        <input type="number" id="ventaIdDelivery" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dirección de Entrega</label>
+                        <textarea id="direccionDelivery" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Referencias</label>
+                        <textarea id="referenciasDelivery" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Fecha de Entrega</label>
+                        <input type="datetime-local" id="fechaDelivery">
+                    </div>
+                    
+                    <button type="submit">Registrar Delivery</button>
+                </form>
+
+                <table id="tablaDeliveries">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
