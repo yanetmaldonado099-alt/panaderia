@@ -20,20 +20,23 @@
             overflow-x: hidden;
         }
 
+        /* FONDO GENERAL - Imagen del cielo */
         body::before {
             content: '';
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIExvZ28gZGUgUGFuaWZpY2FjacOzbiAtLT4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIyNTAiIHI9IjIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTBlMGUwIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjE1JSIgZm9udC1mYW1pbHk9IkN1cnNpdmUsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZpbGw9IiNkMGQwZDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlIHRvZG8gdW4gcG9jbzwvdGV4dD4KICA8cGF0aCBkPSJNMTUwLDI1MCBRMTUwLDIwMCAxODAsMTgwIEwyMDAsMTcwIFEyMjAsMTYwIDI0MCwxNzAgTDI2MCwxODAgUTI5MCwyMDAgMjkwLDI1MCBMMjkwLDMwMCBRMjkwLDMyMCAyNzAsMzMwIEwyMDAsMzMwIFExODAsMzMwIDE3MCwzMjAgTDE1MCwzMDAgWiIgZmlsbD0iI2UwZTBlMCIgc3Ryb2tlPSIjYzBjMGMwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZWxsaXBzZSBjeD0iMjIwIiBjeT0iMjIwIiByeD0iNDAiIHJ5PSIzMCIgZmlsbD0iI2QwZDBkMCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iODUlIiBmb250LWZhbWlseT0iQ3Vyc2l2ZSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZmlsbD0iI2QwZDBkMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UGFuaWZpY2FjacOzbjwvdGV4dD4KPC9zdmc+');
-            background-size: contain;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='img/cielo.jpg') }}");
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.08;
-            z-index: 0;
+            background-position: center center;
+            background-attachment: fixed;
+            opacity: 500;
+            z-index: 1;
             pointer-events: none;
         }
 
@@ -44,8 +47,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, rgba(245, 245, 245, 0.8) 100%);
-            z-index: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(245, 245, 245, 0.6) 100%);
+            z-index: -1;
             pointer-events: none;
         }
 
@@ -86,30 +89,33 @@
             box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3);
         }
 
+        /* IMAGEN DE FONDO DETRAS DEL TITULO */
         header::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background-image: url('img/fondo.jpeg');
-            background-size: contain;
+            width: 600px;
+            height: 600px;
+            background-image: url("{{ url_for('static', filename='img/fondo.jpeg') }}");
+            background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.50;
+            opacity: 0.25;
             z-index: 0;
         }
 
+        /* EMOJIS DECORATIVOS */
         header::after {
             content: '🥖🍞🥐';
             position: absolute;
             top: 10px;
             right: 30px;
             font-size: 30px;
-            opacity: 0.3;
+            opacity: 0.4;
             letter-spacing: 10px;
+            z-index: 1;
         }
 
         h1 {
@@ -128,26 +134,18 @@
             gap: 20px;
         }
 
-        h1::before {
-            content: '';
-            width: 150px;
-            height: 150px;
-            background-image: url('img/logo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            display: inline-block;
-        }
-
+        /* LOGOS A LOS LATERALES DEL TITULO */
+        h1::before,
         h1::after {
             content: '';
-            width: 150px;
-            height: 150px;
-            background-image: url('img/logo.png');
+            width: 120px;
+            height: 120px;
+            background-image: url("{{ url_for('static', filename='img/logo.png') }}");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             display: inline-block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
 
         h2 {
@@ -209,21 +207,23 @@
             padding: 30px;
             position: relative;
             min-height: 500px;
+            background-color: #F5F5DC; /* Color beige */
         }
 
+        /* Logo de fondo en cada sección */
         .content::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background-image: url('logo.png');
+            width: 500px;
+            height: 500px;
+            background-image: url("{{ url_for('static', filename='img/logo.png') }}");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.05;
+            opacity: 0.08;
             z-index: 0;
             pointer-events: none;
         }
@@ -277,7 +277,7 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #8B4513;
         }
 
         button {
@@ -360,24 +360,6 @@
             color: white;
         }
 
-        .item-venta {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .item-venta select, .item-venta input {
-            flex: 1;
-        }
-
-        .item-venta button {
-            background: #dc3545;
-            padding: 10px 20px;
-        }
-
         #mensaje {
             padding: 15px;
             margin: 20px 0;
@@ -453,8 +435,8 @@
 
         .producto-venta:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 24px rgba(255, 107, 107, 0.3);
-            border-color: #ff6b6b;
+            box-shadow: 0 12px 24px rgba(139, 69, 19, 0.3);
+            border-color: #8B4513;
         }
 
         .producto-venta.sin-stock {
@@ -466,14 +448,14 @@
         .producto-venta .imagen {
             width: 100%;
             height: 150px;
-            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 60px;
             margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
         }
 
         .producto-venta h4 {
@@ -599,6 +581,12 @@
                     </div>
                     
                     <div class="form-group">
+                        <label>Imagen (nombre del archivo)</label>
+                        <input type="text" id="imagenProducto" placeholder="Ej: pan-salvado.webp">
+                        <small style="color: #666;">La imagen debe estar en static/img/</small>
+                    </div>
+                    
+                    <div class="form-group">
                         <label>Descripción</label>
                         <textarea id="descripcionProducto" rows="3"></textarea>
                     </div>
@@ -656,7 +644,6 @@
                 <h2>Nueva Venta</h2>
                 
                 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
-                    <!-- Panel de productos -->
                     <div>
                         <h3>Seleccionar Productos</h3>
                         <div style="margin-bottom: 15px;">
@@ -672,7 +659,6 @@
                         <div id="productosVenta" class="grid"></div>
                     </div>
                     
-                    <!-- Panel de carrito -->
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; position: sticky; top: 20px;">
                         <h3>Carrito de Venta</h3>
                         
@@ -704,7 +690,7 @@
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <strong style="font-size: 18px;">TOTAL:</strong>
                                 <span style="font-size: 28px; font-weight: bold; color: #28a745;">
-                                    $<span id="totalVenta">0.000</span>
+                                    $<span id="totalVenta">0.00</span>
                                 </span>
                             </div>
                         </div>
@@ -781,6 +767,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
